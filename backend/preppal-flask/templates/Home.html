@@ -6,14 +6,25 @@
 </head>
 <body>
     <h1>Welcome to PrepPal</h1>
+
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     {% if current_user.is_authenticated %}
         <p>Hello, {{ current_user.username }}!</p>
-        <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+        <form method="POST">
+            <button type="submit" name="logout">Logout</button>
         </form>
     {% else %}
         <a href="/login">Login</a> | <a href="/register">Register</a>
-    {%  endif %}
-
+    {% endif %}
 </body>
 </html>
