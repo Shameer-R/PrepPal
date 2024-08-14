@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_login import LoginManager, current_user, login_user
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from flask_migrate import Migrate
@@ -22,8 +22,15 @@ def load_user(user_id):
     # Load the user from user model
     return User.query.get(int(user_id))
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+
+    if request.method == "POST":
+        if 'logout' in request.form:
+            logout_user()
+            flash("You have been logged out.")
+            return redirect(url_for('home'))
+
     return render_template('Home.html')
 
 @app.route('/register', methods=['GET', 'POST'])
