@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager, current_user, login_user
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from flask_migrate import Migrate
@@ -58,6 +58,20 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == "POST":
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Fetch the user data form the database
+        user = User.query.filter_by(username=username).first()
+
+        if user is None or not user.check_password(password):
+            flash("Invalid username or password!")
+            return redirect(url_for('login'))
+
+        # Log the user in
+        login_user(user)
+        return redirect(url_for('home'))
     return render_template('Login.html')
 
 if __name__ == '__main__':
