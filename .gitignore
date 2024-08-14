@@ -1,5 +1,4 @@
 .DS_Store
 .idea/
 backend/preppal-flask/__pycache__
-config.py
 .env
