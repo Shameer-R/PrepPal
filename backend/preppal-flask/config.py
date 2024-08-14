@@ -9,6 +9,7 @@ class Config:
     database_name = os.getenv("DATABASE_NAME")
     db_username = os.getenv("DB_USERNAME")
     db_password = os.getenv("DB_PASSWORD")
+    SECRET_KEY = os.getenv("SECRET_KEY")
 
     db_url = f'postgresql://{db_username}:{db_password}@localhost/{database_name}'
 
