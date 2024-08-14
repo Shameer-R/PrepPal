@@ -3,3 +3,4 @@
 backend/preppal-flask/__pycache__
 .env
 table_manipulation.py
+backend/preppal-flask/app/__pycache__
