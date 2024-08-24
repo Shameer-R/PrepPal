@@ -20,9 +20,57 @@
 
     {% if current_user.is_authenticated %}
         <p>Hello, {{ current_user.username }}!</p>
+
+         <form method="POST">
+            <label>Cuisine: </label>
+            <select name="cuisine" id="cuisine">
+              <option value="french">French</option>
+              <option value="jamaican">Jamaican</option>
+              <option value="korean">Korean</option>
+              <option value="chinese">Chinese</option>
+              <option value="japanese">Japanese</option>
+              <option value="italian">Italian</option>
+              <option value="mexican">Mexican</option>
+              <option value="indian">Indian</option>
+              <option value="thai">Thai</option>
+              <option value="mediterranean">Mediterranean</option>
+            </select>
+
+           <label>Likes: </label>
+         <select name="likes" id="likes">
+          <option value="spicy">Spicy</option>
+          <option value="sweet">Sweet</option>
+          <option value="savory">Savory</option>
+          <option value="umami">Umami</option>
+          <option value="bitter">Bitter</option>
+          <option value="sour">Sour</option>
+          <option value="crunchy">Crunchy</option>
+          <option value="creamy">Creamy</option>
+          <option value="healthy">Healthy</option>
+          <option value="comfort_food">Comfort Food</option>
+        </select>
+
+
+          <label>Allergies:</label>
+            <select name="allergies" id="allergies">
+              <option value="none">None</option>
+              <option value="gluten">Gluten</option>
+              <option value="nuts">Nuts</option>
+              <option value="dairy">Dairy</option>
+              <option value="shellfish">Shellfish</option>
+              <option value="soy">Soy</option>
+              <option value="eggs">Eggs</option>
+              <option value="fish">Fish</option>
+              <option value="wheat">Wheat</option>
+              <option value="sesame">Sesame</option>
+            </select>
+
+        </form>
+
         <form method="POST">
             <button type="submit" name="logout">Logout</button>
         </form>
+
     {% else %}
         <a href="/login">Login</a> | <a href="/register">Register</a>
     {% endif %}
