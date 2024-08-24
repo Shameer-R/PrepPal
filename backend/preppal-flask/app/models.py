@@ -18,9 +18,9 @@ class User(db.Model, UserMixin):
 
 class UserPreferences(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     cuisine = db.Column(db.String(100))
     dislikes = db.Column(db.String(200))
     allergies = db.Column(db.String(200))
 
-    user = db.relationship('User', backref=db.backref('preferences', lazy=True))
+    user = db.relationship('User', backref='user')
