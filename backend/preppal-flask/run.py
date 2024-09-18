@@ -24,12 +24,20 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-
     if request.method == "POST":
-        if 'logout' in request.form:
+        if 'logout' in request.form: # If user presses logout button
             logout_user()
             flash("You have been logged out.")
             return redirect(url_for('home'))
+        elif 'preferences' in request.form: # If user is submitting preferences
+
+            # Retrieving dropdown selections
+            cuisine_dropdown = request.form.get('cuisine')
+            likes_dropdown = request.form.get('likes')
+            allergies_dropdown = request.form.get('allergies')
+
+            print("Submit preferences for your account: " + cuisine_dropdown, likes_dropdown, allergies_dropdown)
+
 
     return render_template('Home.html')
 
@@ -57,9 +65,6 @@ def register():
         else:
             flash('Username/Email already exists!')
             return redirect(url_for('register'))
-
-
-
 
     return  render_template('Register.html')
 
