@@ -38,3 +38,14 @@ class UserPreferences(db.Model):
                 self.cuisine = ",".join(cuisines)
         else: # If cuisine column doesn't exist
             self.cuisine = cuisineString
+
+    def add_allergies(self, allergyString):
+        if self.allergies: # If allergies column exists
+            allergySplitString = self.allergies.split(',')
+            # Making sure there are no duplicates
+            if allergyString not in allergySplitString:
+                # Adding new allergies to list and converting it back into one string
+                allergySplitString.append(allergyString)
+                self.cuisine = ",".join(allergySplitString)
+        else: # If allergies column doesn't exist
+            self.cuisine = allergyString
