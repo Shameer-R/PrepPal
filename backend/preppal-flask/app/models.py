@@ -24,3 +24,14 @@ class UserPreferences(db.Model):
     allergies = db.Column(db.String(200))
 
     user = db.relationship('User', backref='user')
+
+    def add_cuisine(self, cuisineString):
+        if self.cuisine: # If cuisine column exists
+            cuisines = self.cuisine.split(',')
+            # Making sure there are no duplicate cuisine
+            if cuisineString not in cuisines:
+                # Adding new cuisine to list and converting it back into one string
+                cuisines.append(cuisineString)
+                self.cuisine = ",".join(cuisines)
+        else: # If cuisine column doesn't exist
+            self.cuisine = cuisineString
