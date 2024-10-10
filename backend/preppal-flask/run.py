@@ -46,13 +46,12 @@ def home():
                 user_preferences.add_cuisine(cuisine_dropdown)
                 print(cuisine_dropdown + " has been added to cuisine column")
 
+            if allergies_dropdown:
+                user_preferences.add_allergies(allergies_dropdown)
+                print(allergies_dropdown + " has been added to allergies column")
+
             # Commit changes to database
             db.session.commit()
-
-
-
-            print("Submit preferences for your account: " + cuisine_dropdown, likes_dropdown, allergies_dropdown)
-
 
     return render_template('Home.html')
 
