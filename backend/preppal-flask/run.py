@@ -14,8 +14,8 @@ migrate = Migrate(app, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-# Import the user model
-from app.models import User
+# Import the user and user preferences model
+from app.models import User, UserPreferences
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -30,11 +30,26 @@ def home():
             flash("You have been logged out.")
             return redirect(url_for('home'))
         elif 'preferences' in request.form: # If user is submitting preferences
-
             # Retrieving dropdown selections
             cuisine_dropdown = request.form.get('cuisine')
             likes_dropdown = request.form.get('likes')
             allergies_dropdown = request.form.get('allergies')
+
+            user_preferences = UserPreferences.query.filter_by(user_id=current_user.id).first()
+
+            if user_preferences is None:
+                # If user preferences don't exist create a new one
+                user_preferences = UserPreferences(user_id=current_user.id)
+                db.session.add(user_preferences)
+
+            if cuisine_dropdown:
+                user_preferences.add_cuisine(cuisine_dropdown)
+                print(cuisine_dropdown + " has been added to cuisine column")
+
+            # Commit changes to database
+            db.session.commit()
+
+
 
             print("Submit preferences for your account: " + cuisine_dropdown, likes_dropdown, allergies_dropdown)
 
