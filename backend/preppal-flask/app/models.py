@@ -24,6 +24,7 @@ class UserPreferences(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     cuisine = db.Column(db.String(100))
     dislikes = db.Column(db.String(200))
+    likes = db.Column(db.String(200))
     allergies = db.Column(db.String(200))
 
     user = db.relationship('User', backref='user')
@@ -39,6 +40,19 @@ class UserPreferences(db.Model):
         else: # If cuisine column doesn't exist
             self.cuisine = cuisineString
 
+    def add_likes(self, likesString):
+        if self.likes: # if likes column exists
+            likesSplitString = self.likes.split(',')
+            # Making sure there are no duplicates
+            if likesString not in likesSplitString:
+                # Adding new likes to list and converting it back into one string
+                likesSplitString.append(likesString)
+                self.likes = ",".join(likesSplitString)
+            else: # If Likes column doesn't exist
+                self.likes = likesString
+
+
+
     def add_allergies(self, allergyString):
         if self.allergies: # If allergies column exists
             allergySplitString = self.allergies.split(',')
@@ -46,6 +60,6 @@ class UserPreferences(db.Model):
             if allergyString not in allergySplitString:
                 # Adding new allergies to list and converting it back into one string
                 allergySplitString.append(allergyString)
-                self.cuisine = ",".join(allergySplitString)
+                self.allergies = ",".join(allergySplitString)
         else: # If allergies column doesn't exist
-            self.cuisine = allergyString
+            self.allergies = allergyString

@@ -50,6 +50,10 @@ def home():
                 user_preferences.add_allergies(allergies_dropdown)
                 print(allergies_dropdown + " has been added to allergies column")
 
+            if likes_dropdown:
+                user_preferences.add_likes(likes_dropdown)
+                print(likes_dropdown + " has been added to likes")
+
             # Commit changes to database
             db.session.commit()
 
