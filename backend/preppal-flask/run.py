@@ -104,5 +104,9 @@ def login():
         return redirect(url_for('home'))
     return render_template('Login.html')
 
+@app.route('/MealPlanner', methods=['GET', 'POST'])
+def MealPlanner():
+    return render_template('MealPlanner.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
