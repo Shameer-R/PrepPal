@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal Planner</title>
+</head>
+
+<body>
+    <h1>Meal Planner</h1>
+
+    <div class="planner-container">
+
+        <form action="/generate-meal-plan" method="POST">
+            <!-- Current Duration fixed to 7 Days
+                Plans to add more customizability in the future -->
+
+                <input type="hidden" name="duration" value="7">
+
+                <br>
+
+                <label for="meals">Meals to Include:</label><br>
+
+                <input type="checkbox" id="breakfast" name="meals" value="breakfast">
+                <label for="breakfast">Breakfast</label><br>
+
+                <input type="checkbox" id="lunch" name="meals" value="lunch">
+                <label for="lunch">Lunch</label><br>
+
+                <input type="checkbox" id="dinner" name="meals" value="dinner">
+                <label for="dinner">Dinner</label><br>
+
+                <input type="checkbox" id="snacks" name="meals" value="snacks">
+                <label for="snacks">Snacks</label><br>
+
+                <br>
+
+                <!-- Nutritional Goals -->
+                <label for="calories">Calorie Goal (optional):</label>
+                <input type="number" id="calories" name="calories" placeholder="e.g., 2000"><br>
+
+                <br>
+
+                <!-- Generate Button -->
+                <button type="submit">Generate Meal Plan</button>
+        </form>
+
+    </div>
+</body>
