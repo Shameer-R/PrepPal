@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
@@ -107,6 +107,23 @@ def login():
 @app.route('/MealPlanner', methods=['GET', 'POST'])
 def MealPlanner():
     return render_template('MealPlanner.html')
+
+@app.route('/generate-meal-plan', methods=['POST'])
+def generateMealPlan():
+    # Get Form Data
+    meals = request.form.getlist('meals')
+    calories = request.form.get('calories')
+    duration = request.form.get('duration')
+
+    meal_plan = {
+        'duration': duration,
+        'meals': meals,
+        'calorie_goal': calories,
+        "plan": ["Meal 1", "Meal 2", "Meal 3"]
+    }
+
+    return jsonify(meal_plan)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
