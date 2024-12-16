@@ -1,6 +1,6 @@
 # PrepPal 
 
-## Status: Currently Abandoned
+## Status: In progress
 
 ### Description: 
 
